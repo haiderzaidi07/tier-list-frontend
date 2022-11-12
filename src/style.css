@@ -1,0 +1,130 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+h1{
+  text-align: center;
+}
+
+form{
+  width: 50%;
+  float: left;
+}
+
+label{
+  padding: 8px;
+}
+
+.clearfix > form:first-child{
+  width: 40%;
+  padding-left: 19%;
+}
+
+h2{
+  text-align: center;
+  font-size: 2rem;
+}
+
+i{
+  cursor: pointer;
+}
+
+.label{
+  width: 10%;
+}
+
+.label + section{
+  width: 50%;
+}
+
+.label span{
+  display: table;
+  margin: 10% auto;
+}
+
+.topTier > *, .midTier > *, .bottomTier > *{
+  float: left;
+}
+
+.topTier{
+  border: 3px solid green;
+}
+
+.topTier section + section{
+  border-left: 3px solid green;
+}
+
+.midTier{
+  border: 3px solid rgb(180, 180, 0);
+}
+
+.midTier section + section{
+  border-left: 3px solid rgb(180, 180, 0);
+}
+
+.bottomTier{
+  border: 3px solid rgb(213, 1, 1);
+}
+
+.bottomTier section + section{
+  border-left: 3px solid rgb(213, 1, 1);
+}
+
+.topTier .label span{
+  color: green;
+  font-size: 1.3rem;
+}
+
+.midTier .label span{
+  color: rgb(180, 180, 0);
+  font-size: 1.3rem;
+}
+
+.bottomTier .label span{
+  color: rgb(213, 1, 1);
+  font-size: 1.3rem;
+}
+
+li > span{
+  font-size: 1.15rem;
+}
+
+li > span + span{
+  color: transparent;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
