@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ItemsContext } from "../contexts/ItemsContext"
 
 const Forms = (props) => {
+
+    const { addItem } = useContext(ItemsContext)
     
-    const [ title, addTitle ] = useState('')
-    const [ item, addItem ] = useState('')
-    const [ tier, addTier ] = useState('')
+    const [title, addTitle] = useState('')
+    const [name, addName] = useState('')
+    const [tier, addTier] = useState('')
 
     const onSubmitTitle = (e) => {
         e.preventDefault()
@@ -14,22 +17,20 @@ const Forms = (props) => {
             return
         }
 
-        props.addTitle( title )
-
+        props.addTitle(title)
         addTitle('')
     }
 
     const onSubmitItem = (e) => {
         e.preventDefault()
 
-        if(!item){
+        if(!name || !tier){
             alert("Cannot submit empty form")
             return
         }
 
-        props.onAdd({ item, tier })
-
-        addItem('')
+        addItem({ name, tier })
+        addName('')
         addTier('')
     }
 
@@ -42,9 +43,14 @@ const Forms = (props) => {
             </form>
             <form onSubmit={onSubmitItem} >
                 <label htmlFor="name">Name:</label>
-				<input type="text" placeholder="e.g Cricket, Football etc" name="name" value={item} onChange={e => addItem(e.target.value)} />
+				<input type="text" placeholder="e.g Cricket, Football etc" name="name" value={name} onChange={e => addName(e.target.value)} />
 				<label htmlFor="tier">Tier:</label>
-				<input type="text" placeholder="top, mid or bottom" name="tier" title="Type your Tier: top, mid or bottom (in lowercase case only)" value={tier} onChange={e => addTier(e.target.value)}/>
+                <select onChange={e => addTier(e.target.value)}>
+                    <option value="">--Select</option>
+                    <option value="top">Top</option>
+                    <option value="mid">Mid</option>
+                    <option value="bottom">Bottom</option>
+                </select>
                 <input type="submit" value="Submit" />
             </form>
         </div>

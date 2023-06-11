@@ -119,10 +119,7 @@ i{
 
 li > span{
   font-size: 1.15rem;
-}
-
-li > span + span{
-  color: transparent;
+  margin-right: 10px;
 }
 
 /******************************************
