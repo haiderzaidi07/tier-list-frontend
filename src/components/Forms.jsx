@@ -1,9 +1,10 @@
-import { useContext, useState } from "react"
-import { ItemsContext } from "../contexts/ItemsContext"
+import { useState } from "react"
+import { useItemsContext } from "../hooks/useItemsContext"
+import Axios from "axios"
 
 const Forms = (props) => {
 
-    const { addItem } = useContext(ItemsContext)
+    const { dispatch } = useItemsContext()
     
     const [title, addTitle] = useState('')
     const [name, addName] = useState('')
@@ -29,7 +30,12 @@ const Forms = (props) => {
             return
         }
 
-        addItem({ name, tier })
+        Axios.post('http://localhost:3001/addItem', { name, tier })
+        .then(res => {
+            dispatch({type: 'ADD_ITEM', payload: res.data})
+        })
+        .catch(err => console.error(err))
+
         addName('')
         addTier('')
     }

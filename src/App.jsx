@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <h1>Tier List</h1>
       <ItemsContextProvider>
-        <Forms addTitle={addTitle} title={title}/>
+        <Forms addTitle={addTitle} />
         <h2>{title}</h2>
         <Tier tier="Top" colour="topTier" />
         <Tier tier="Mid" colour="midTier" />
