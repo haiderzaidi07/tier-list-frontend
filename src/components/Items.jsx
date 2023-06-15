@@ -12,7 +12,7 @@ const Items = ({tier}) => {
 
         if(user){
 
-            Axios.get("https://colorful-lamb-pinafore.cyclic.app/",
+            Axios.get("https://careful-ruby-gopher.cyclic.app/",
             {
                 headers: {
                     authorization: `Bearer ${user.token}`
@@ -28,7 +28,7 @@ const Items = ({tier}) => {
 
     const deleteItem = (id) => {
     
-        Axios.delete(`http://localhost:3001/delete/${id}`,
+        Axios.delete(`https://careful-ruby-gopher.cyclic.app/delete/${id}`,
         {
             headers: {
                 authorization: `Bearer ${user.token}`
@@ -44,7 +44,7 @@ const Items = ({tier}) => {
     
         const newTier = item.tier === "bottom" ? "mid" : "top"  
     
-        Axios.put('http://localhost:3001/upgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
+        Axios.put('https://careful-ruby-gopher.cyclic.app/upgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(() => {
             dispatch({type: 'UPGRADE_TIER', payload: { _id: item._id, name: item.name, tier: newTier }})
         })
@@ -54,7 +54,7 @@ const Items = ({tier}) => {
     
         const newTier = item.tier === "top" ? "mid" : "bottom"  
     
-        Axios.put('http://localhost:3001/downgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
+        Axios.put('https://careful-ruby-gopher.cyclic.app/downgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(() => {
             dispatch({type: 'DOWNGRADE_TIER', payload: { _id: item._id, name: item.name, tier: newTier }})
         })

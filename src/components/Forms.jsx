@@ -38,7 +38,7 @@ const Forms = ({addTitle}) => {
             return
         }
 
-        Axios.post('http://localhost:3001/addItem', { name, tier }, { headers: { authorization: `Bearer ${user.token}` }})
+        Axios.post('https://careful-ruby-gopher.cyclic.app/addItem', { name, tier }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(res => {
             dispatch({type: 'ADD_ITEM', payload: res.data})
         })

@@ -11,7 +11,7 @@ export const useRegister = () => {
         setIsLoading(true)
         setError(null)
 
-        axios.post('http://localhost:3001/users/register', {
+        axios.post('https://careful-ruby-gopher.cyclic.app/users/register', {
             username,
             password,
             confirmPassword

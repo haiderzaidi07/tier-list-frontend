@@ -11,7 +11,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        axios.post('https://colorful-lamb-pinafore.cyclic.app/users/login', {
+        axios.post('https://careful-ruby-gopher.cyclic.app/users/login', {
             username,
             password
         })
