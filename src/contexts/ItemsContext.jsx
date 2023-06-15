@@ -3,7 +3,7 @@ import { ItemReducer } from '../reducers/ItemReducer';
 
 export const ItemsContext = createContext()
 
-const ItemsContextProvider = ({children}) => {
+export const ItemsContextProvider = ({children}) => {
     
     const [state, dispatch] = useReducer(ItemReducer, { items: [] })
 
@@ -12,7 +12,4 @@ const ItemsContextProvider = ({children}) => {
             { children }
         </ItemsContext.Provider>
     )
-
 }
-
-export default ItemsContextProvider

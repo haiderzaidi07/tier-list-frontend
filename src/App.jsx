@@ -1,27 +1,25 @@
-import Forms from './components/Forms'
-import Tier from './components/Tier'
-import { useState } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './style.css'
-import ItemsContextProvider from './contexts/ItemsContext'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
 
-  const [title, setTitle] = useState("")
-
-  const addTitle = (title) => {
-    setTitle(title)
-  }
+  const { user } = useAuthContext()
 
   return (
     <div className="App">
-      <h1>Tier List</h1>
-      <ItemsContextProvider>
-        <Forms addTitle={addTitle} />
-        <h2>{title}</h2>
-        <Tier tier="Top" colour="topTier" />
-        <Tier tier="Mid" colour="midTier" />
-        <Tier tier="Bottom" colour="bottomTier" />
-      </ItemsContextProvider>
+      <BrowserRouter>
+        <Navbar />     
+        <Routes>
+          <Route path='/' element={ user ? <Home /> : <Navigate to='/users/login' />} />
+          <Route path='/users/register' element={ !user ? <Register /> : <Navigate to='/' />} />
+          <Route path='/users/login' element={ !user ? <Login /> : <Navigate to='/' />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

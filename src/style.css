@@ -34,8 +34,37 @@ body {
 /* LAYOUT
 /*******************************************/
 
-h1{
-  text-align: center;
+
+.nav-links{
+  padding: 10px;
+}
+
+.title{
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 55%;
+  padding: 5%;
+}
+
+.navbar{
+  padding: 1% 0;
+  margin-bottom: 5%;
+}
+
+.register-form, .login-form{
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title, .nav-links{
+  color: black;
+  text-decoration: none;
+}
+
+.logout{
+  cursor: pointer;
 }
 
 form{

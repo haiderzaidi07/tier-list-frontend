@@ -1,25 +1,40 @@
 import { useEffect } from "react"
 import Axios from "axios"
 import { useItemsContext } from "../hooks/useItemsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const Items = ({tier}) => {
 
     const {items, dispatch} = useItemsContext()
+    const { user } = useAuthContext() 
 
     useEffect(() => {
 
-        Axios.get("http://localhost:3001/")
-        .then(res => {
-            dispatch({type: 'SET_ITEMS', payload: res.data})
-        })
-        .catch(err => console.error(err))
+        if(user){
 
-    }, [dispatch])
+            Axios.get("https://colorful-lamb-pinafore.cyclic.app/",
+            {
+                headers: {
+                    authorization: `Bearer ${user.token}`
+                }
+            })
+            .then(res => {
+                dispatch({type: 'SET_ITEMS', payload: res.data})
+            })
+            .catch(err => console.error(err))
+        }
+
+    }, [dispatch, user])
 
     const deleteItem = (id) => {
     
-        Axios.delete(`http://localhost:3001/delete/${id}`)
-        .then((res) => {
+        Axios.delete(`http://localhost:3001/delete/${id}`,
+        {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            }
+        })
+        .then(() => {
             dispatch({type: 'DELETE_ITEM', payload: id})
         })
         .catch(err => console.error(err))
@@ -29,7 +44,7 @@ const Items = ({tier}) => {
     
         const newTier = item.tier === "bottom" ? "mid" : "top"  
     
-        Axios.put('http://localhost:3001/upgrade', { newTier: newTier, id: item._id })
+        Axios.put('http://localhost:3001/upgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(() => {
             dispatch({type: 'UPGRADE_TIER', payload: { _id: item._id, name: item.name, tier: newTier }})
         })
@@ -39,7 +54,7 @@ const Items = ({tier}) => {
     
         const newTier = item.tier === "top" ? "mid" : "bottom"  
     
-        Axios.put('http://localhost:3001/downgrade', { newTier: newTier, id: item._id })
+        Axios.put('http://localhost:3001/downgrade', { newTier: newTier, id: item._id }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(() => {
             dispatch({type: 'DOWNGRADE_TIER', payload: { _id: item._id, name: item.name, tier: newTier }})
         })
