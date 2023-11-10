@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../redux/Auth'
+import { setItems } from '../redux/Items'
 
 const Navbar = () => {
 
-    const { logout } = useLogout()
-    const { user } = useAuthContext()
+    const { user } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     return (
         <div className='navbar'>
@@ -13,7 +14,7 @@ const Navbar = () => {
             {user ? (
                 <>
                     <span className='nav-links'>{user.username}</span>
-                    <span className='nav-links logout' onClick={() => logout()}>Logout</span>
+                    <span className='nav-links logout' onClick={() => {dispatch(logout()); dispatch(setItems([]))}}>Logout</span>
                 </>
             ) : (
                 <>

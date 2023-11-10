@@ -4,11 +4,11 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import { useAuthContext } from './hooks/useAuthContext'
+import { useSelector } from 'react-redux'
 
 function App() {
 
-  const { user } = useAuthContext()
+  const { user } = useSelector(state => state.auth)
 
   return (
     <div className="App">

@@ -1,17 +1,17 @@
 import { useState } from "react"
-import { useItemsContext } from "../hooks/useItemsContext"
 import Axios from "axios"
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useDispatch, useSelector } from "react-redux"
+import { addItem } from '../redux/Items'
 
 const Forms = ({addTitle}) => {
-
-    const { dispatch } = useItemsContext()
-    const { user } = useAuthContext() 
-
+    
     const [title, setTitle] = useState('')
     const [name, setName] = useState('')
     const [tier, setTier] = useState('')
     const [error, setError] = useState('')
+
+    const { user } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     const onSubmitTitle = (e) => {
         e.preventDefault()
@@ -38,9 +38,9 @@ const Forms = ({addTitle}) => {
             return
         }
 
-        Axios.post('https://careful-ruby-gopher.cyclic.app/addItem', { name, tier }, { headers: { authorization: `Bearer ${user.token}` }})
+        Axios.post('http://localhost:3001/addItem', { name, tier }, { headers: { authorization: `Bearer ${user.token}` }})
         .then(res => {
-            dispatch({type: 'ADD_ITEM', payload: res.data})
+            dispatch(addItem(res.data))
         })
         .catch(err => console.error(err))
 

@@ -5,12 +5,12 @@ const Login = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const { login, error, isLoading } = useLogin()
+    const { loggingIn, error, isLoading } = useLogin()
     
     const handleSubmit = e => {
         e.preventDefault()
 
-        login(username, password)
+        loggingIn(username, password)
 
         setUsername('')
         setPassword('')

@@ -1,23 +1,24 @@
 import axios from "axios"
 import { useState } from "react"
-import { useAuthContext } from "./useAuthContext"
+import { useDispatch } from "react-redux"
+import { login } from '../redux/Auth'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const dispatch = useDispatch()
 
-    const login = (username, password) => {
+    const loggingIn = (username, password) => {
         setIsLoading(true)
         setError(null)
-
-        axios.post('https://careful-ruby-gopher.cyclic.app/users/login', {
+        // https://careful-ruby-gopher.cyclic.app
+        axios.post('http://localhost:3001/users/login', {
             username,
             password
         })
         .then(res => {
             localStorage.setItem('user', JSON.stringify(res.data))
-            dispatch({type: 'LOGIN', payload: res.data})
+            dispatch(login(res.data))
             setIsLoading(false)
         })
         .catch(err => {
@@ -26,5 +27,5 @@ export const useLogin = () => {
         })
     }
 
-    return { login, error, isLoading }
+    return { loggingIn, error, isLoading }
 }
