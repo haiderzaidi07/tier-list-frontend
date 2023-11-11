@@ -7,12 +7,14 @@ const Navbar = () => {
 
     const { user } = useSelector(state => state.auth)
     const dispatch = useDispatch()
+    const profilePicture = user ? user.profilePicture ? user.profilePicture : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" : null
 
     return (
         <div className='navbar'>
             <Link to='/' className='title'>Tier List</Link>
             {user ? (
                 <>
+                    <img className='profilePicture' referrerPolicy="no-referrer" src={profilePicture}  alt="#" />
                     <span className='nav-links'>{user.username}</span>
                     <span className='nav-links logout' onClick={() => {dispatch(logout()); dispatch(setItems([]))}}>Logout</span>
                 </>

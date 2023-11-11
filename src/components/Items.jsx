@@ -1,15 +1,15 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setItems } from '../redux/Items'
-import axios from "axios"
 import { useItems } from "../hooks/useItems"
+import axios from "axios"
 
 const Items = ({tier}) => {
 
     const { user } = useSelector(state => state.auth)
     const { items } = useSelector(state => state.items)
-    const dispatch = useDispatch()
     const { deletingItem, upgradingTier, downgradingTier } = useItems()
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
@@ -20,6 +20,7 @@ const Items = ({tier}) => {
                 }
             })
             .then(res => {
+                // console.table(res.data)
                 dispatch(setItems(res.data))
             })
             .catch(err => console.error(err))

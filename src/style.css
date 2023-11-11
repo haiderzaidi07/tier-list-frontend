@@ -43,12 +43,14 @@ body {
   font-size: 30px;
   font-weight: bold;
   margin-right: 55%;
-  padding: 5%;
+  padding: 0 5%;
 }
 
 .navbar{
-  padding: 1% 0;
-  margin-bottom: 5%;
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .register-form, .login-form{
@@ -61,6 +63,11 @@ body {
 .title, .nav-links{
   color: black;
   text-decoration: none;
+}
+
+.profilePicture{
+  width: 30px;
+  border-radius: 2rem;
 }
 
 .logout{
