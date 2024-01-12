@@ -1,16 +1,16 @@
 import axios from "axios"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../redux/hooks"
 import { login } from '../redux/Auth'
 
 export const useLogin = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
-    const dispatch = useDispatch()
+    const [error, setError] = useState<string>("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
-    const loggingIn = (username, password) => {
+    const loggingIn = (username: string, password: string) => {
         setIsLoading(true)
-        setError(null)
+        setError("")
         // https://careful-ruby-gopher.cyclic.app
         axios.post('http://localhost:3001/users/login', {
             username,
@@ -23,6 +23,7 @@ export const useLogin = () => {
         })
         .catch(err => {
             setIsLoading(false)
+            // console.log(err.response.data)
             setError(err.response.data.error)
         })
     }

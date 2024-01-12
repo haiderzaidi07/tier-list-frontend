@@ -4,15 +4,11 @@ import { useState } from 'react'
 
 const Home = () => {
 
-    const [title, setTitle] = useState("")
-
-    const addTitle = (title) => {
-        setTitle(title)
-    }
+    const [title, setTitle] = useState<string>("")
 
     return (
         <div>
-            <Forms addTitle={addTitle} />
+            <Forms setTitle={setTitle} title={title} />
             <h2>{title}</h2>
             <Tier tier="Top" colour="topTier" />
             <Tier tier="Mid" colour="midTier" />

@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux"
 import { login } from '../redux/Auth'
 
 export const useRegister = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [error, setError] = useState<string>("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const dispatch = useDispatch()
 
-    const register = (username, password, confirmPassword) => {
+    const register = (username: string, password: string, confirmPassword: string) => {
         setIsLoading(true)
-        setError(null)
+        setError("")
 
         axios.post('http://localhost:3001/users/register', {
             username,
